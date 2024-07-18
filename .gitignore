@@ -1,0 +1,5 @@
+# Ignore all .txt files
+*.txt
+
+# But do not ignore specific file (e.g., path.txt)
+!requeriments.txt
