@@ -2,4 +2,4 @@
 *.txt
 
 # But do not ignore specific file (e.g., path.txt)
-!routes.txt
+!model_script/requirements.txt
