@@ -1,5 +1,2 @@
-# Ignore all .txt files
-*.txt
-
 # But do not ignore specific file (e.g., path.txt)
-!model_script/requirements.txt
+!model_script/routes.txt
