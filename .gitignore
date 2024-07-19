@@ -1,2 +1,5 @@
 # But do not ignore specific file (e.g., path.txt)
 !model_script/routes.txt
+
+# Ignore temporary files
+__pycache__/
