@@ -1,5 +1,14 @@
 # But do not ignore specific file (e.g., path.txt)
-!model_script/routes.txt
+
 
 # Ignore temporary files
 __pycache__/
+.ipynb_checkpoints
+routes.txt
+mascara320.tif
+npy_data_504
+npy_mask_504
+data
+masks
+data320.tif
+models/model.pth

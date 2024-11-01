@@ -1,11 +1,11 @@
-#!/home/gomosak/cnf/bin/python
-from fastai.vision.all import * # type: ignore
+## #!/home/gomosak/cnf/bin/python
+from fastai.vision.all import * 
 
 import matplotlib.pyplot as plt
 import numpy as np
-from path import Path # type: ignore
-import torch # type: ignore
-from torchvision import transforms as T # type: ignore
+from path import Path 
+import torch 
+from torchvision import transforms as T 
 
 from data_loading import load_data
 from metrics import seg_accuracy
@@ -17,12 +17,12 @@ print(torch.cuda.is_available())
 # Read the path from the text file
 with open('routes.txt', 'r') as file:
     path_str = file.read().strip()  # Read the path and strip any surrounding whitespace
-
+#routes.txt
 # Convert the path string to a Path object
 path = Path(path_str)
 
-imgs_path = path/'npy_data_504'
-lbls_path = path/'npy_mask_504'
+imgs_path = path/'data'
+lbls_path = path/'masks'
 
 
 print(f'Checking number of files - images:{len([f for f in imgs_path.iterdir()])}\
@@ -37,8 +37,8 @@ def order(x):
     
 img_path_1 = sorted([f for f in imgs_path.iterdir()], key = lambda x: int(x.stem))
 msk_path_1 = sorted([f for f in lbls_path.iterdir()], key = lambda x: int(x.stem))
-img_path = img_path_1[190]
-msk_path = msk_path_1[190]
+img_path = img_path_1[12]
+msk_path = msk_path_1[12]
 img = np.load(str(img_path))
 msk = np.load(str(msk_path))
 
@@ -53,7 +53,7 @@ batch_size = 4
 dls = load_data(imgs_path, lbls_path, img_size, batch_size)
 
 # Create model
-model = create_model("resnet101", in_channels=6, classes=7)
+model = create_model("resnet101", in_channels=11, classes=7)
 
 # Create loss function
 loss_func = CombinedLoss()
@@ -66,7 +66,7 @@ wd = 0.00039897560969184224
 learner = create_learner(model, loss_func, opt_func=partial(opt_func, wd=wd), db=dls, metrics=[seg_accuracy])
 
 # Train the model
-#learner.fine_tune(5)
+learner.fine_tune(300)
 
 # Show results
 show_segmentation_results(learner)
@@ -77,6 +77,11 @@ show_segmentation_results(learner)
 lr_min = learner.lr_find(start_lr=1e-07, end_lr=10)
 
 # Plot the learning rate finder results
-learner.recorder.plot_lr_find()
-plt.show()
-print(lr_min)
+#learner.recorder.plot_lr_find()
+#plt.show()
+#print(lr_min)
+
+show_segmentation_results(learner)
+# Save the model after training
+learner.save("model")
+print("model saved")
