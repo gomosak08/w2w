@@ -83,5 +83,11 @@ lr_min = learner.lr_find(start_lr=1e-07, end_lr=10)
 
 show_segmentation_results(learner)
 # Save the model after training
-learner.save("model")
-print("model saved")
+# Save the model after training
+
+models_numer = [d for d in os.listdir('models')]
+numbers = [int(re.search(r'[0-9]+', run).group()) for run in models_numer if re.search(r'[0-9]+', run)]
+highest_number = max(numbers) if numbers else 1
+
+learner.save(f'model_{highest_number+1}')
+print("model saved in",f' models/model_{highest_number+1}')

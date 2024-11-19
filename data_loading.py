@@ -32,7 +32,7 @@ def load_data(path, mask_path, img_size, batch_size):
         blocks=(TransformBlock(type_tfms=partial(MSTensorImage.create, chnls_first=True)),
                 TransformBlock(type_tfms=partial(open_npy_mask, cls=TensorMask, path=mask_path + '/'))),
         get_items=fv.get_files,
-        splitter=fv.RandomSplitter(valid_pct=0.1),
+        splitter=fv.RandomSplitter(valid_pct=0.3),
         batch_tfms=tfms,
     )
 
