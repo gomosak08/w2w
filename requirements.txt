@@ -1,7 +1,5 @@
-fastai==2.7.18
 ipykernel==6.29.5
 ipython==8.26.0
-torch==2.5.0
 numpy==2.0.1
 path==17.0.0
 matplotlib==3.9.2

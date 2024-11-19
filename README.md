@@ -1,60 +1,122 @@
+# Wall to Wall
+
+**Author:** Kevin Saúl Gómez Molina  
+**Email:** [gomosak@outlook.es](mailto:gomosak@outlook.es)  
+
+If you have any questions or need further assistance with this project, feel free to reach out via any of the contact options above.
+
+---
+# Experimental Results and Analysis
+
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Setup](#setup)
+3. [Example Showcase](#example-showcase)
+4. [Best Model Result](#best-model-result)
+5. [Other Results](#other-results)
+6. [Last Result in Chihuahua](#last-result-in-chihuahua)
+
+---
+
+## Introduction
+
+**Note:** All the code provided below is in an experimental phase; therefore, it must be used with caution.
+
+The primary objective of this project is to develop accurate and reliable land forest coverage maps using advanced image segmentation techniques. By classifying each pixel within an image, we aim to produce detailed thematic maps that can support environmental analysis and decision-making processes. The project is focused on utilizing state-of-the-art deep learning architectures for image segmentation, leveraging frameworks such as **PyTorch** and the **segmentation_models_pytorch** library.
+
+A key challenge in this work is the limited availability of high-quality training masks, which affects the ability of the models to generalize effectively. Additionally, the computational cost of training these models is significant due to the complexity of the data and the need for pixel-level precision. Another limitation arises from the imbalance in the data distribution: most of the dataset represents forested areas, while only a small fraction corresponds to urban regions or water bodies. This imbalance creates challenges for the model in accurately identifying underrepresented classes.
+
+The current work is centered on the state of **Chihuahua**, utilizing geospatial data to create accurate land coverage maps. We are employing **accuracy** as the primary evaluation metric to assess the performance of the models. By addressing these challenges and refining the methodology, this project aims to contribute to the development of robust tools for environmental monitoring and land management.
+
+In this document, we will showcase experimental results, presenting both the best and worst outcomes of the models. The examples highlight the strengths and limitations of the approach, offering insights into areas that require further improvement.
 
 
-Wall to Wall
+---
 
-Note: All the code provided below is in an experimental phase; therefore, it must be used with caution.
+## Setup
+The setup process for this project is designed specifically for **Ubuntu systems**. A shell script (`setup.sh`) has been provided to automate the installation of dependencies and prepare the environment. The script ensures all necessary tools, libraries, and the virtual environment are properly configured. Below are the steps included in the setup:
 
-In this section, I will present some images demonstrating both the best and worst results of the models.
 
-Example Showcase:
+The setup process for this project is designed specifically for **Ubuntu systems**. A shell script (`setup.sh`) has been provided to automate the installation of dependencies and prepare the environment. The script ensures all necessary tools, libraries, and the virtual environment are properly configured. Below are the steps included in the setup:
+
+1. **PyTorch and FastAI Installation**:
+   - The project requires **PyTorch 2.0** and **FastAI 2.7.12**. To ensure compatibility, we recommend following the official installation guides:
+     - [PyTorch Installation Guide](https://pytorch.org/get-started/locally/)
+     - [FastAI Installation Guide](https://docs.fast.ai/)
+
+   Use the following command to install these versions directly:
+   ```bash
+   pip install torch==2.0.0 torchvision==0.15.0 fastai==2.7.12
+Ensure that you select the appropriate CUDA version for your system during the installation of PyTorch. You can find compatible options in the PyTorch guide.
+
+
+2. **Creating a Virtual Environment**:
+   - A Python virtual environment is created to isolate the project dependencies from the system Python environment, ensuring a clean and manageable setup:
+     ```bash
+     python3 -m venv path/to/venv
+     source path/to/venv/bin/activate
+     ```
+
+3. **Installing Dependencies**:
+   - After activating the virtual environment, all required Python packages are installed from the `requirements.txt` file:
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+### Notes:
+- Ensure you have Python 3.10 or later installed on your system before running the setup script.
+- If any issues arise during the installation of PyTorch or FastAI, refer to the official documentation linked above for troubleshooting.
+
+
+
+
+---
+
+## Example Showcase
 
 Our example starts with the image and its corresponding mask, where each pixel in the mask holds the value of its corresponding pixel in the image. The mask represents the classification of the image. Therefore, the objective is to train a model to predict the classification for each pixel in the images.
 
-<img src="https://github.com/CONAFOR-GTMRV/wtow/assets/79944448/e2029eb4-4881-4efa-891b-8dc96a60d1da" width="500" height="300">
+<img src="image/imagen1.png" width="500" height="300">
 
-Then, we proceed to construct batches to accelerate processing using GPU. For this purpose, I've developed a class to manage images consisting of 6 bands along with their corresponding masks. Each image has a size of 256x256 pixels. Considering the available resources, I create batches containing 4 images. Additionally, I've incorporated some basic transformations such as rotation, vertical flipping, zoom, and brightness adjustment to enhance the completeness of the dataset. However, there is pot![Screenshot from 2024-05-23 10-55-12]()
-ential to apply more sophisticated transformations.
+Then, we proceed to construct batches to accelerate processing using GPU. For this purpose, I've developed a class to manage images consisting of 6 bands along with their corresponding masks. Each image has a size of 256x256 pixels. Considering the available resources, We create batches containing 4 images. Additionally, I've incorporated some basic transformations such as rotation, vertical flipping, zoom, and brightness adjustment to enhance the completeness of the dataset. However, there is potential to apply more sophisticated transformations.
 
-<img src="https://github.com/CONAFOR-GTMRV/wtow/assets/79944448/65560abf-1c07-4262-95bd-a1de67f1f3c9" width="500" height="500">
+<img src="image/imagen2.png" width="400" height="250">
 
-
-I have experimented with various model architectures, such as ResNet, FPN, and UnetPlusPlus, in order to find the optimal model for the task. To facilitate this process, I utilized the segmentation_models_pytorch library. Additionally, I explored different loss functions, optimizers, and evaluation metrics to assess the performance of the models. Currently, I am employing the MulticlassDiceLoss as the loss function and DiceMulticlass as the metric function. As for optimizers, I opted for a classic one, utilizing the Ranger optimizer.
+We have experimented with various model architectures, such as ResNet, FPN, and UnetPlusPlus, in order to find the optimal model for the task. To facilitate this process, We utilized the segmentation_models_pytorch library. Additionally, We explored different loss functions, optimizers, and evaluation metrics to assess the performance of the models. Currently, We are employing the MulticlassDiceLoss as the loss function and DiceMulticlass as the metric function. As for optimizers, We opted for a classic one, utilizing the Ranger optimizer.
 
 Here's an example showcasing the comparison between a random prediction (left) and the actual mask image (right):
 
-<img src="https://github.com/gomosak08/wall-to-wall/assets/79944448/797d4aa9-03f6-4f5c-97a2-33a9ed018a96" width="500" height="500">
+<img src="image/imagen3.png" width="500" height="500">
 
-Best Model Result:
+---
+
+## Best Model Result
 
 This image showcases the best result achieved by the model, boasting a remarkable general accuracy of .948:
 
-<img src = "https://github.com/gomosak08/wall-to-wall/assets/79944448/87173383-71dd-4062-959b-37065f59d26b" width = "500" heigth = "500">
+<img src="image/imagen4.png" width="500" height="500">
 
-Other Results:
+---
+
+## Other Results
+
 Here are additional images representing the outcomes of the model:
 
-Image 1:
+**Image 1:**
 
-<img src = "https://github.com/gomosak08/wall-to-wall/assets/79944448/87173383-71dd-4062-959b-37065f59d26b" width = "500" heigth = "500">
+<img src="image/imagen5.png" width="500" height="500">
 
-Image 2:
+**Image 2:**
 
-<img src = "https://github.com/gomosak08/wall-to-wall/assets/79944448/9f9a31e1-927c-4e27-94ac-a886b4dd5594" width = "500" heigth = "500">
+<img src="image/imagen6.png" width="500" height="500">
 
+We have also attempted to enhance the dataset by generating virtual data based on the real data. However, this approach did not yield satisfactory results because the virtual data exhibits a normal distribution, whereas the real data does not. Therefore, my current strategy is to improve the real data by applying transformations.
 
+---
 
-I have also attempted to enhance the dataset by generating virtual data based on the real data. However, this approach did not yield satisfactory results because the virtual data exhibits a normal distribution, whereas the real data does not. Therefore, my current strategy is to improve the real data by applying transformations.
+## Last Result in Chihuahua
 
-here are the results with the virtual data
-
-![image](https://github.com/CONAFOR-GTMRV/Wall-to-wall/assets/79944448/a65ce2d5-20f6-43d0-9f28-355412fea35f)
-
-
-Here is the model's performance when using both real and virtual data simultaneously.
-![image](https://github.com/CONAFOR-GTMRV/Wall-to-wall/assets/79944448/de872831-7d3a-418e-b0a3-50cac2040ae0)
+We conducted an exercise in the state of Chihuahua using segmented data developed by GTMRSV through CONAFOR. Our preliminary results showed promising patterns; however, the data requires further post-processing to improve its clarity and accuracy. Specifically, one key adjustment will involve filtering out areas smaller than 1 hectare, which can help reduce noise and enhance the precision of the visual output. This step is essential for focusing on meaningful spatial patterns and ensuring that the final image provides a clear and actionable representation of the landscape. This exercise achieved an accuracy of 87% in the initial mode
 
 
-
-
-
-# w2w
+<img src = "image/imagen7.png" width = "500" heigth = "500">
