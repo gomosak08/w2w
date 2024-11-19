@@ -47,7 +47,7 @@ print(f'Checking shapes - image: {img.shape} mask: {msk.shape}')
 
 # Example usage
 img_size = (544, 480)
-batch_size = 4
+batch_size = 1
 
 # Load data
 dls = load_data(imgs_path, lbls_path, img_size, batch_size)
@@ -66,7 +66,7 @@ wd = 0.00039897560969184224
 learner = create_learner(model, loss_func, opt_func=partial(opt_func, wd=wd), db=dls, metrics=[seg_accuracy])
 
 # Train the model
-learner.fine_tune(300)
+learner.fine_tune(1)
 
 # Show results
 show_segmentation_results(learner)
@@ -83,5 +83,10 @@ lr_min = learner.lr_find(start_lr=1e-07, end_lr=10)
 
 show_segmentation_results(learner)
 # Save the model after training
-learner.save("model")
-print("model saved")
+
+models_numer = [d for d in os.listdir('models')]
+numbers = [int(re.search(r'[0-9]+', run).group()) for run in models_numer if re.search(r'[0-9]+', run)]
+highest_number = max(numbers) if numbers else 1
+
+learner.save(f'model_{highest_number+1}')
+print("model saved in",f' models/model_{highest_number+1}')
