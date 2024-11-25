@@ -51,7 +51,7 @@ The setup process for this project is tailored specifically for Ubuntu systems. 
 
       Use the following command to install these versions directly:
       ```bash
-      pip install fastai==2.7.18
+      pip install fastai==2.7.18 
       ```
     - Ensure that you select the appropriate CUDA version for your system during the installation of PyTorch. You can find compatible options in the PyTorch guide.
 
