@@ -12,3 +12,5 @@ data
 masks
 data320.tif
 models/*.pth
+input
+*xml
