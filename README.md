@@ -38,33 +38,33 @@ For a specific instance like the AWS G5, you can run ```setup.sh```, which will 
 
 The setup process for this project is tailored specifically for Ubuntu systems. To streamline the installation, we provide clear instructions for installing PyTorch and other required dependencies. The process ensures all necessary tools, libraries, and the virtual environment are properly configured. Follow the steps below to set up the environment:
 
-1. **PyTorch and FastAI Installation**:
-   - The project requires **PyTorch 2.0** and **FastAI 2.7.12**. To ensure compatibility, we recommend following the official installation guides:
-     - [PyTorch Installation Guide](https://pytorch.org/get-started/locally/)
-     - [FastAI Installation Guide](https://docs.fast.ai/)
 
-   Use the following command to install these versions directly:
-   ```bash
-   fastai==2.7.18
-- Ensure that you select the appropriate CUDA version for your system during the installation of PyTorch. You can find compatible options in the PyTorch guide.
-
-- To verify that PyTorch is installed correctly, run the following commands in your terminal:
-  ```bash
-  ipython
-  ```
-  Then, inside the IPython shell:
-  ```bash
-  import torch
-  print(torch.__version__)
-  ```
-  If PyTorch is installed correctly, this will return the version of PyTorch installed on your system.
-
-2. **Creating a Virtual Environment**:
+1. **Creating a Virtual Environment**:
    - A Python virtual environment is created to isolate the project dependencies from the system Python environment, ensuring a clean and manageable setup:
      ```bash
      python3 -m venv path/to/venv
      source path/to/venv/bin/activate
-     ```
+2. **PyTorch and FastAI Installation**:
+   - The project requires **PyTorch 2.0** and **FastAI 2.7.12**. To ensure compatibility, we recommend following the official installation guides:
+     - [PyTorch Installation Guide](https://pytorch.org/get-started/locally/)
+     - [FastAI Installation Guide](https://docs.fast.ai/)
+
+      Use the following command to install these versions directly:
+      ```bash
+      pip install fastai==2.7.18
+      ```
+    - Ensure that you select the appropriate CUDA version for your system during the installation of PyTorch. You can find compatible options in the PyTorch guide.
+
+    - To verify that PyTorch is installed correctly, run the following commands in your terminal:
+      ```bash
+      ipython
+      ```
+      Then, inside the IPython shell:
+      ```bash
+      import torch
+      print(torch.__version__)
+      ```
+      If PyTorch is installed correctly, this will return the version of PyTorch installed on your system.
 
 3. **Installing Dependencies**:
    - After activating the virtual environment, all required Python packages are installed from the `requirements.txt` file:
