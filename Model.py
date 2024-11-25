@@ -21,8 +21,8 @@ with open('routes.txt', 'r') as file:
 # Convert the path string to a Path object
 path = Path(path_str)
 
-imgs_path = path/'data'
-lbls_path = path/'masks'
+imgs_path = path/'npy_data_504'
+lbls_path = path/'npy_mask_504'
 
 
 print(f'Checking number of files - images:{len([f for f in imgs_path.iterdir()])}\
@@ -53,7 +53,7 @@ batch_size = 1
 dls = load_data(imgs_path, lbls_path, img_size, batch_size)
 
 # Create model
-model = create_model("resnet101", in_channels=11, classes=7)
+model = create_model("resnet101", in_channels=6, classes=7)
 
 # Create loss function
 loss_func = CombinedLoss()
