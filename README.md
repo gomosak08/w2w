@@ -44,7 +44,7 @@ The setup process for this project is tailored specifically for Ubuntu systems. 
      python3 -m venv path/to/venv
      source path/to/venv/bin/activate
 2. **PyTorch and FastAI Installation**:
-   - The project requires **PyTorch 2.0** and **FastAI 2.7.12**. To ensure compatibility, we recommend following the official installation guides:
+   - The project requires **PyTorch ** and **FastAI 2.7.18 **. To ensure compatibility, we recommend following the official installation guides:
      - [PyTorch Installation Guide](https://pytorch.org/get-started/locally/)
      - [FastAI Installation Guide](https://docs.fast.ai/)
 
