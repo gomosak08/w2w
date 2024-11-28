@@ -5,3 +5,5 @@ path==17.0.0
 matplotlib==3.9.2
 segmentation-models-pytorch==0.3.4
 jupyterlab==4.2.4
+tqdm==4.66.5
+rasterio==1.4.1

@@ -11,6 +11,6 @@ npy_mask_504
 data
 masks
 data320.tif
-models/*.pth
+models/*.pkl
 input
 *xml

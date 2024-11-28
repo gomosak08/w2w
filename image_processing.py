@@ -1,7 +1,8 @@
 import torch
 import numpy as np
-from path import Path # type: ignore
+from path import Path 
 from fastai.vision.core import TensorImage
+import matplotlib.pyplot as plt
 
 
 
@@ -68,7 +69,11 @@ class MSTensorImage(TensorImage):
         visu_img = np.where(visu_img > 1, 1, visu_img)
         visu_img = np.where(visu_img < 0, 0, visu_img)
 
-        plt.imshow(visu_img) if ctx is None else ctx.imshow(visu_img)
+        if ctx is None:
+            plt.imshow(visu_img)  # Correctly visualize the image
+            plt.show()            # Display the plot without arguments
+        else:
+            ctx.imshow(visu_img)  # Use the provided context for display
 
         return ctx
     def __repr__(self):

@@ -34,8 +34,7 @@ In this document, we will showcase experimental results, presenting both the bes
 ---
 
 ## Setup
-For a specific instance like the AWS G5, you can run ```setup.sh```, which will create the environment, install all the necessary drivers, the CUDA toolkit, and all the required libraries.
-
+For a specific instance like the AWS G5, you can run `drivers.sh`, which creates the environment and installs all the necessary drivers, including the CUDA toolkit. After running this script, you need to reboot the system and then execute `setup.sh` to install all the required libraries.
 The setup process for this project is tailored specifically for Ubuntu systems. To streamline the installation, we provide clear instructions for installing PyTorch and other required dependencies. The process ensures all necessary tools, libraries, and the virtual environment are properly configured. Follow the steps below to set up the environment:
 
 
