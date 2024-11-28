@@ -65,14 +65,14 @@ def predict_and_save_masks(learner_path: str, imgs_dir: Path, preds_dir: str, li
 routes_file = 'routes.txt'
 
 # Model and data directories
-learner_path = 'models/model_7.pkl'
+learner_path = 'models/model.pkl'
 preds_dir = 'preds/'
 
 # Load paths from the routes file
 base_path = load_paths_from_file(routes_file)
 
 # Define input image directory
-imgs_dir = base_path / 'npy_data_504'
+imgs_dir = base_path / 'data'
 
 # Predict masks and save results
 predict_and_save_masks(learner_path, imgs_dir, preds_dir, limit=2)
