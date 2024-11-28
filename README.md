@@ -320,23 +320,6 @@ After running the script, the following outputs will be generated:
      - `m/1.npy`
      - ...
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Example Showcase
 
 Our example starts with the image and its corresponding mask, where each pixel in the mask holds the value of its corresponding pixel in the image. The mask represents the classification of the image. Therefore, the objective is to train a model to predict the classification for each pixel in the images.
